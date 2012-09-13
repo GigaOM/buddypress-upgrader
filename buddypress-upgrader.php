@@ -10,14 +10,13 @@ Author URI: http://borkweb.com
 
 global $bp_upgrader_log;
 
-$bp_prefix = bp_core_get_table_prefix();
-
 $bp_upgrader_log = array();
 
 function upgrade_to_1_1_3() {
 	do_action( 'debug_robot', __FUNCTION__);
 	global $wpdb;
-	global $bp_prefix;
+
+	$bp_prefix = bp_core_get_table_prefix();
 
 	/* Drop the old sitewide and user activity tables */
 	do_action( 'debug_robot', "Drop {$bp_prefix}bp_activity_user_activity and {$bp_prefix}bp_activity_sitewide");
@@ -32,7 +31,8 @@ function upgrade_to_1_2_9() {
 	do_action( 'debug_robot', __FUNCTION__);
 
 	global $wpdb;
-	global $bp_prefix;
+
+	$bp_prefix = bp_core_get_table_prefix();
 
 	$wpdb->query( "ALTER TABLE {$bp_prefix}bp_messages_messages ADD thread_id bigint(20) NOT NULL AFTER id" );
 
@@ -73,7 +73,8 @@ function upgrade_to_1_5_7()
 	do_action( 'debug_robot', __FUNCTION__);
 
 	global $wpdb;
-	global $bp_prefix;
+
+	$bp_prefix = bp_core_get_table_prefix();
 
 	// Rename fields from pre BP 1.2
 	if ( $wpdb->get_var( "SHOW TABLES LIKE '%{$bp_prefix}bp_activity%'" ) ) {
@@ -93,7 +94,8 @@ function upgrade_to_1_6_1() {
 	do_action( 'debug_robot', __FUNCTION__);
 
 	global $wpdb;
-	global $bp_prefix;
+
+	$bp_prefix = bp_core_get_table_prefix();
 
 	do_action( 'debug_robot', 'Altering bp_activity' );
 	$wpdb->query( "ALTER TABLE {$bp_prefix}bp_activity CHANGE primary_link primary_link varchar(255) NOT NULL" );
