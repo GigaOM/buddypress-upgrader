@@ -20,6 +20,7 @@ function upgrade_to_1_1_3() {
 
 	/* Drop the old sitewide and user activity tables */
 	do_action( 'debug_robot', "Drop {$bp_prefix}bp_activity_user_activity and {$bp_prefix}bp_activity_sitewide");
+	$wpdb->query( "RENAME TABLE {$bp_prefix}bp_activity_user_activity_cached TO {$bp_prefix}bp_activity" );
 	$wpdb->query( "DROP TABLE IF EXISTS {$bp_prefix}bp_activity_user_activity_cached" );
 	$wpdb->query( "DROP TABLE IF EXISTS {$bp_prefix}bp_activity_user_activity" );
 	$wpdb->query( "DROP TABLE IF EXISTS {$bp_prefix}bp_activity_sitewide" );
